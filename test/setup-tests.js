@@ -41,7 +41,10 @@ async function migrateMysqlDatabase() {
         reject(error);
         return;
       }
-      resolve();
+
+      client.end(() => {
+        resolve();
+      });
     });
   });
 

@@ -1,0 +1,39 @@
+{
+  "name": "pialabs-managed-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node --es-module-specifier-resolution=node src/main.js"
+  },
+  "author": "guilhermeais",
+  "contributors": [
+    {
+      "name": "guilhermeais",
+      "email": "guilhermeteixeiraais@gmail.com",
+      "url": "https://github.com/guilhermeais"
+    },
+    {
+      "name": "ABBorges1"
+    },
+    {
+      "name": "devguiamf"
+    }
+  ],
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "dotenv": "^16.4.5",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.7"
+  },
+  "devDependencies": {
+    "@testcontainers/mysql": "^10.9.0",
+    "unplugin-swc": "^1.4.5",
+    "vitest": "^1.6.0"
+  }
+}

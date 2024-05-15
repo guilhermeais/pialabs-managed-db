@@ -1,6 +1,6 @@
 import { Product } from "./product";
 import { ProductsRepository } from "./products.repository";
-import { fakerPT_BR } from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 export class CreateRandomProduct {
   /**
@@ -18,10 +18,10 @@ export class CreateRandomProduct {
 
   async execute() {
     const product = new Product({
-      descricao: fakerPT_BR.commerce.productName().slice(0, 50),
-      categoria: fakerPT_BR.commerce.department().slice(0, 10),
-      valor: fakerPT_BR.commerce.price(),
-      criadoEm: fakerPT_BR.date.recent(),
+      descricao: faker.commerce.productName().slice(0, 50),
+      categoria: faker.commerce.department().slice(0, 10),
+      valor: faker.commerce.price(),
+      criadoEm: faker.date.recent(),
     });
     try {
       console.log(

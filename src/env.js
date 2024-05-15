@@ -17,4 +17,6 @@ export const env = {
     ? parseInt(process.env.CREATE_PRODUCT_INTERVAL_MS)
     : 500,
   MAX_PRODUCTS: process.env.MAX_PRODUCTS,
+
+  NODE_ENV: process.env.NODE_ENV || "development",
 };

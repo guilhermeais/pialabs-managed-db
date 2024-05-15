@@ -7,7 +7,8 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "start": "node --es-module-specifier-resolution=node src/main.js"
+    "start": "node --es-module-specifier-resolution=node src/main.js",
+    "start:test": "npx cross-env NODE_ENV=test npm run start"
   },
   "author": "guilhermeais",
   "contributors": [

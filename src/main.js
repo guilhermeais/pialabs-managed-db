@@ -11,8 +11,8 @@ setup().then(() => {
 
 const closeEvents = ["SIGINT", "SIGTERM"];
 closeEvents.forEach((evt) =>
-  process.on(evt, async () => {
-    console.log(`[main] recebido o sinal SIGINT, finalizando...`);
+  process.once(evt, async () => {
+    console.log(`[main] recebido o sinal ${evt}, finalizando...`);
     if (app) await app.stop();
     await teardown();
 

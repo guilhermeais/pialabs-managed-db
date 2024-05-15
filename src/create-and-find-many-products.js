@@ -1,6 +1,5 @@
 import { CreateRandomProduct } from "./create-random-product";
 import { ProductsRepository } from "./products.repository";
-import { setTimeout } from "node:timers/promises";
 
 export class CreateAndFindManyProducts {
   /**
@@ -12,23 +11,19 @@ export class CreateAndFindManyProducts {
    */
   #productsRepository;
 
-  #ms = 500;
   #createdProductIds = [];
 
   #maxProducts;
 
-  constructor(productsRepository, createRandomProduct, ms = 500, maxProducts) {
+  constructor(productsRepository, createRandomProduct, maxProducts) {
     this.#createRandomProduct = createRandomProduct;
     this.#productsRepository = productsRepository;
-    this.#ms = ms;
     this.#maxProducts = maxProducts;
   }
 
   async *execute() {
     console.log(
-      `[CreateAndFindManyProducts.execute] iniciando criação de produtos de ${
-        this.#ms
-      } em ${this.#ms} ms...`
+      `[CreateAndFindManyProducts.execute] iniciando criação de produtos`
     );
 
     let keepCreating = true;
@@ -76,8 +71,6 @@ export class CreateAndFindManyProducts {
         keepCreating = false;
         return;
       }
-
-      await setTimeout(this.#ms);
     }
 
     return;
@@ -91,7 +84,7 @@ export class CreateAndFindManyProducts {
     const products = await this.#productsRepository.findMany(productIds);
 
     console.log(
-      `[CreateAndFindManyProducts.#consumeProducts] produtos encontrados: ${JSON.stringify(
+      `[CreateAndFindManyProducts.#consumeProducts] ultimos 10 produts produtos encontrados: ${JSON.stringify(
         products,
         null,
         2

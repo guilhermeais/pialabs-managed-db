@@ -3,9 +3,8 @@ import { CreateAndFindManyProducts } from "./create-and-find-many-products";
 import { CreateRandomProduct } from "./create-random-product";
 import { env } from "./env";
 import { MySQLProductsRepository } from "./mysql-products.repository";
-
+import { setTimeout } from "timers/promises";
 export function makeApp() {
-  console.log("env: ", env);
   const readDbPool = createPool({
     host: env.READ_DB_HOST,
     port: env.READ_DB_PORT,
@@ -42,6 +41,8 @@ export function makeApp() {
         if (err) {
           console.error("[readDbPool.end] error: ", err);
         }
+
+        console.log("[readDbPool.end] finalizado com sucesso!");
         resolve();
       });
     });
@@ -51,6 +52,8 @@ export function makeApp() {
         if (err) {
           console.error("[writeDbPool.end] error: ", err);
         }
+
+        console.log("[writeDbPool.end] finalizado com sucesso!");
         resolve();
       });
     });
@@ -71,21 +74,25 @@ export function makeApp() {
       const { value } = await generator.next();
       const { stop } = value;
       if (stop instanceof Function) {
-        stops.push(stop);
+        stops.unshift(stop);
       }
 
       for await (const { product } of generator) {
         console.log(
           `[app] produto criado: ${JSON.stringify(product, null, 2)}`
         );
+        await setTimeout(env.CREATE_PRODUCT_INTERVAL_MS);
       }
     },
     stop: async () => {
-      await Promise.all(
-        stops.map((stop) => {
-          return stop();
-        })
-      );
+      while (stops.length) {
+        const stop = stops.pop();
+        await stop();
+      }
+
+      console.log(`[app] finalizado com sucesso!`);
+
+      return;
     },
   };
 }

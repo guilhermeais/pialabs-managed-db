@@ -18,7 +18,7 @@ export class CreateRandomProduct {
 
   async execute() {
     const product = new Product({
-      descricao: faker.commerce.productName().slice(0, 50),
+      descricao: `${faker.commerce.product()} [${faker.string.uuid()}]`,
       categoria: faker.commerce.department().slice(0, 10),
       valor: faker.commerce.price(),
       criadoEm: faker.date.recent(),
